@@ -1,0 +1,4 @@
+[submodule "YRpp"]
+	path = yrpp
+	url = https://github.com/Phobos-developers/YRpp.git
+	branch = master
