@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Lenin\dllmain.cpp" />
+    <ClCompile Include="Lenin\杂项\类型转换.cpp">
+      <Filter>杂项</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\杂项\路径.cpp">
+      <Filter>杂项</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\杂项\时间.cpp">
+      <Filter>杂项</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\cpp-数据\内存数据.cpp">
+      <Filter>cpp-数据</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\cpp-数据\读写文件.cpp">
+      <Filter>cpp-数据</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\辅助类\连点器.cpp">
+      <Filter>辅助类</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\杂项\其他.cpp">
+      <Filter>杂项</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\启动游戏\跳过ra2md.cpp">
+      <Filter>启动游戏</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenin\修复Bug\光棱塔串联比例.cpp">
+      <Filter>修复Bug</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Lenin\Stalin.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="YRpp\Syringe.h" />
+    <ClInclude Include="Lenin\头文件\数据.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Lenin\头文件\其他.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Lenin\头文件\启动游戏.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Lenin\头文件\通用函数.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DFYH.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{b1325272-6e23-48df-b20c-4b25222a61d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="杂项">
+      <UniqueIdentifier>{42082196-6639-4816-a912-8bde19a15d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp-数据">
+      <UniqueIdentifier>{933f6fc3-a8e1-4d97-a7d5-4260ba76c390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="辅助类">
+      <UniqueIdentifier>{fb419e6d-6b35-4211-bf36-de511b475ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="启动游戏">
+      <UniqueIdentifier>{a29d3a37-52c2-48d3-ab53-0983a51c1d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="修复Bug">
+      <UniqueIdentifier>{4c935862-0cb9-489d-a070-b578ccd4807a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
