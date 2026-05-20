@@ -1,6 +1,6 @@
 # DFYH引擎扩展<br>SilverFox Engine Expansion
 
-DFYH引擎扩展是东方银狐一时兴起做的一个引擎扩展，基于天啟(Sovietianqi)的 [October-Revolution](https://github.com/Sovietianqi/October-Revolution)尤复引擎模板 ，为 Yuri's Revenge 提供了一系列修复和辅助，以支持注入代码。  
+DFYH引擎扩展是东方银狐一时兴起做的一个引擎扩展，基于天啟(Sovietianqi)的 [October-Revolution](https://github.com/Sovietianqi/October-Revolution) 尤复引擎模板 ，为 Yuri's Revenge 提供了一系列修复和辅助，以支持注入代码。  
 
 (感谢Phobos的YRpp和Ares的Syringe)  
 [YRpp仓库链接](https://github.com/Phobos-developers/YRpp)  
