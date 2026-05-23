@@ -1,16 +1,17 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 
+#include <头文件/数据.h>
 
-bool 杀死调试器()
+bool 杀死调试器 ()
 {
 	auto GetDebuggerProcessId = [](DWORD dwSelfProcessId) -> DWORD
 		{
 			DWORD dwParentProcessId = -1;
-			HANDLE hSnapshot = CreateToolhelp32Snapshot(2, 0);
+			HANDLE hSnapshot = CreateToolhelp32Snapshot (2, 0);
 			PROCESSENTRY32 pe32;
-			pe32.dwSize = sizeof(PROCESSENTRY32);
-			Process32First(hSnapshot, &pe32);
+			pe32.dwSize = sizeof (PROCESSENTRY32);
+			Process32First (hSnapshot, &pe32);
 			do
 			{
 				if (pe32.th32ProcessID == dwSelfProcessId)
@@ -18,55 +19,58 @@ bool 杀死调试器()
 					dwParentProcessId = pe32.th32ParentProcessID;
 					break;
 				}
-			} while (Process32Next(hSnapshot, &pe32));
-			CloseHandle(hSnapshot);
+			} while (Process32Next (hSnapshot, &pe32));
+			CloseHandle (hSnapshot);
 			return dwParentProcessId;
 		};
 
-	HMODULE hModule = LoadLibrary("ntdll.dll");
+	HMODULE hModule = LoadLibrary ("ntdll.dll");
 	if (hModule != NULL)
 	{
+		写入日志 ("!!!检测到调试器，已尝试移除调试器并结束调试器进程");
 		auto const NtRemoveProcessDebug =
-			(NTSTATUS(__stdcall*)(HANDLE, HANDLE))GetProcAddress(hModule, "NtRemoveProcessDebug");
+			(NTSTATUS (__stdcall*)(HANDLE, HANDLE))GetProcAddress (hModule, "NtRemoveProcessDebug");
 		auto const NtSetInformationDebugObject =
-			(NTSTATUS(__stdcall*)(HANDLE, ULONG, PVOID, ULONG, PULONG))GetProcAddress(hModule, "NtSetInformationDebugObject");
+			(NTSTATUS (__stdcall*)(HANDLE, ULONG, PVOID, ULONG, PULONG))GetProcAddress (hModule, "NtSetInformationDebugObject");
 		auto const NtQueryInformationProcess =
-			(NTSTATUS(__stdcall*)(HANDLE, ULONG, PVOID, ULONG, PULONG))GetProcAddress(hModule, "NtQueryInformationProcess");
+			(NTSTATUS (__stdcall*)(HANDLE, ULONG, PVOID, ULONG, PULONG))GetProcAddress (hModule, "NtQueryInformationProcess");
 		auto const NtClose =
-			(NTSTATUS(__stdcall*)(HANDLE))GetProcAddress(hModule, "NtClose");
+			(NTSTATUS (__stdcall*)(HANDLE))GetProcAddress (hModule, "NtClose");
 
 		HANDLE hDebug;
-		HANDLE hCurrentProcess = GetCurrentProcess();
-		NTSTATUS status = NtQueryInformationProcess(hCurrentProcess, 30, &hDebug, sizeof(HANDLE), 0);
+		HANDLE hCurrentProcess = GetCurrentProcess ();
+		NTSTATUS status = NtQueryInformationProcess (hCurrentProcess, 30, &hDebug, sizeof (HANDLE), 0);
 		if (0 <= status)
 		{
 			ULONG killProcessOnExit = FALSE;
-			status = NtSetInformationDebugObject(
+			status = NtSetInformationDebugObject (
 				hDebug,
 				1,
 				&killProcessOnExit,
-				sizeof(ULONG),
+				sizeof (ULONG),
 				NULL
 			);
 			if (0 <= status)
 			{
-				const auto pid = GetDebuggerProcessId(GetProcessId(hCurrentProcess));
-				status = NtRemoveProcessDebug(hCurrentProcess, hDebug);
+				const auto pid = GetDebuggerProcessId (GetProcessId (hCurrentProcess));
+				status = NtRemoveProcessDebug (hCurrentProcess, hDebug);
 				if (0 <= status)
 				{
-					HANDLE hDbgProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+					HANDLE hDbgProcess = OpenProcess (PROCESS_ALL_ACCESS, FALSE, pid);
 					if (INVALID_HANDLE_VALUE != hDbgProcess)
 					{
-						BOOL ret = TerminateProcess(hDbgProcess, EXIT_SUCCESS);
-						CloseHandle(hDbgProcess);
+						BOOL ret = TerminateProcess (hDbgProcess, EXIT_SUCCESS);
+						CloseHandle (hDbgProcess);
 						return ret;
 					}
 				}
 			}
-			NtClose(hDebug);
+			NtClose (hDebug);
 		}
-		FreeLibrary(hModule);
+		FreeLibrary (hModule);
 	}
+
+	写入日志 ("!!!无法检测到调试器，或无法成功移除调试器");
 
 	return false;
 }

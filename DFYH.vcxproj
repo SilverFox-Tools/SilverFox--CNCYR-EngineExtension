@@ -15,7 +15,7 @@
     <ClCompile Include="Lenin\cpp-数据\读写文件.cpp" />
     <ClCompile Include="Lenin\cpp-数据\钩子.cpp" />
     <ClCompile Include="Lenin\dllmain.cpp" />
-    <ClCompile Include="Lenin\修复Bug\光棱塔串联比例.cpp" />
+    <ClCompile Include="Lenin\修复Bug\光棱塔串联伤害比例.cpp" />
     <ClCompile Include="Lenin\启动游戏\跳过ra2md.cpp" />
     <ClCompile Include="Lenin\杂项\其他.cpp" />
     <ClCompile Include="Lenin\杂项\时间.cpp" />
@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lenin\Stalin.h" />
+    <ClInclude Include="Lenin\头文件\修复Bug.h" />
     <ClInclude Include="Lenin\头文件\其他.h" />
     <ClInclude Include="Lenin\头文件\启动游戏.h" />
     <ClInclude Include="Lenin\头文件\数据.h" />
